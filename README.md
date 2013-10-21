@@ -6,10 +6,18 @@ Manual y ejemplo de configuración para un servidor CentOS 6.4
 Instalacion
 -----------
 
-**Utilerias, editores de texto y dotfiles**
+**Configuracion basica**
+
+    emacs /root/.bashrc /root/.emacs
+    cp /etc/sysconfig/network /etc/sysconfig/network.orig
+    emacs /etc/sysconfig/network
+    cp /etc/sysconfig/clock /etc/sysconfig/clock.orig
+    emacs /etc/sysconfig/clock
+    cp /usr/share/zoneinfo/Mexico/General /etc/localtime
+
+**Utilerias y editores de texto**
 
     yum install yum-utils.x86_64 screen.x86_64 emacs-nox.x86_64 vim-minimal.x86_64
-    emacs /root/.bashrc /root/.emacs
 
 **Depositos EPEL y REMI**
 
@@ -22,14 +30,6 @@ Instalacion
 **Actualizar sistema**
 
     yum update
-
-**Configuracion basica**
-
-    cp /etc/sysconfig/network /etc/sysconfig/network.orig
-    emacs /etc/sysconfig/network
-    cp /etc/sysconfig/clock /etc/sysconfig/clock.orig
-    emacs /etc/sysconfig/clock
-    cp /usr/share/zoneinfo/Mexico/General /etc/localtime
 
 **Firewall**
 
@@ -58,12 +58,32 @@ Instalacion
 
     emacs /etc/yum.repos.d/nginx.repo
     yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64
-    cp /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.orig
-    emacs /etc/nginx/conf.d/default.conf
     chkconfig nginx on
     /etc/init.d/nginx start
     chkconfig php-fpm on
     /etc/init.d/php-fpm start
+
+**Git**
+
+    yum install git.x86_64
+
+**Sudo**
+
+    cp /etc/sudoers /etc/sudoers.orig
+    visudo
+
+**Sitio codigo.labplc.mx**
+
+    mkdir /srv/sites/codigo.labplc.mx
+    mkdir /srv/sites/codigo.labplc.mx/web
+    mkdir /srv/sites/codigo.labplc.mx/web/htdocs
+    mkdir /srv/sites/codigo.labplc.mx/log
+    chown nginx:nginx /srv/sites/codigo.labplc.mx/log
+    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.orig
+    emacs /etc/nginx/conf.d/default.conf
+    echo 'codigo.labplc.mx' > /srv/sites/codigo.labplc.mx/web/htdocs/index.html
+    echo '<?php phpinfo(); ?>' > /srv/sites/codigo.labplc.mx/web/htdocs/phpinfo.php
+    /etc/init.d/nginx restart
 
 Mantenimiento
 -------------
@@ -76,3 +96,8 @@ Mantenimiento
 **Crear rol de usuario en PostgreSQL**
 
     su - postgres -c 'createuser -d manuel'
+
+**Carpeta publica de usuario**
+
+    chmod 711 /home/manuel
+    mkdir /home/manuel/public_html
