@@ -63,6 +63,10 @@ Instalacion
     chkconfig php-fpm on
     /etc/init.d/php-fpm start
 
+**NodeJS y NPM (Node Package Manager)**
+    
+    yum install npm
+
 **Git**
 
     yum install git.x86_64
