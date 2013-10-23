@@ -38,6 +38,7 @@ Instalacion
     iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
     iptables -A INPUT -p tcp --dport 22 -j ACCEPT
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 8000:8999 -j ACCEPT
 
     iptables -P INPUT DROP
     iptables -P FORWARD DROP
@@ -62,6 +63,10 @@ Instalacion
     /etc/init.d/nginx start
     chkconfig php-fpm on
     /etc/init.d/php-fpm start
+
+**NodeJS y NPM (Node Package Manager)**
+    
+    yum install npm
 
 **Git**
 
