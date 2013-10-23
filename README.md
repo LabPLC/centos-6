@@ -97,7 +97,16 @@ Mantenimiento
 
     su - postgres -c 'createuser -d manuel'
 
-**Carpeta publica de usuario**
+**Crear carpeta publica de usuario**
 
     chmod 711 /home/manuel
     mkdir /home/manuel/public_html
+
+**Agregar host virtual**
+
+    mkdir /srv/sites/api.codigo.labplc.mx
+    mkdir /srv/sites/api.codigo.labplc.mx/web
+    mkdir /srv/sites/api.codigo.labplc.mx/web/htdocs
+    mkdir /srv/sites/api.codigo.labplc.mx/log
+    chown nginx:nginx /srv/sites/api.codigo.labplc.mx/log
+    emacs /etc/nginx/conf.d/api.conf
