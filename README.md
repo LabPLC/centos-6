@@ -59,14 +59,16 @@ Instalacion
 
     emacs /etc/yum.repos.d/nginx.repo
     yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64
+    cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.orig
+    emacs /etc/php-fpm.d/www.conf
     chkconfig nginx on
     /etc/init.d/nginx start
     chkconfig php-fpm on
     /etc/init.d/php-fpm start
 
-**NodeJS y NPM (Node Package Manager)**
+**NodeJS y NPM**
     
-    yum install npm
+    yum install nodejs.x86_64 npm.noarch
 
 **Git**
 
