@@ -46,11 +46,17 @@ Instalacion
 
     /etc/init.d/iptables save
 
+**OpenSSH**
+
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orig
+    emacs /etc/ssh/sshd_config
+    /etc/init.d/sshd restart
+
 **PostgreSQL y PostGIS**
 
     wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
     rpm -Uvh pgdg-centos93-*.rpm
-    yum install postgis2_93.x86_64 postgresql93-server.x86_64 postgresql93.x86_64
+    yum install postgis2_93.x86_64 postgresql93-server.x86_64 postgresql93-devel.x86_64 postgresql93.x86_64
     service postgresql-9.3 initdb
     chkconfig postgresql-9.3 on
     /etc/init.d/postgresql-9.3 start
@@ -65,6 +71,11 @@ Instalacion
     /etc/init.d/nginx start
     chkconfig php-fpm on
     /etc/init.d/php-fpm start
+
+**Extensiones PHP**
+
+    yum install php-pear.noarch php-devel.x86_64 make.x86_64
+    pecl install oauth
 
 **NodeJS y NPM**
     
