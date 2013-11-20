@@ -61,12 +61,24 @@ Instalacion
     chkconfig postgresql-9.3 on
     /etc/init.d/postgresql-9.3 start
 
+**Configuración PostgreSQL**
+
+    su - postgres -c psql
+    \password
+    \q
+
+    cp /var/lib/pgsql/9.3/data/pg_hba.conf /var/lib/pgsql/9.3/data/pg_hba.conf.orig
+    emacs /var/lib/pgsql/9.3/data/pg_hba.conf
+    /etc/init.d/postgresql-9.3 restart
+
 **Nginx y PHP-FPM**
 
     emacs /etc/yum.repos.d/nginx.repo
     yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64
     cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.orig
     emacs /etc/php-fpm.d/www.conf
+    mkdir /var/lib/php/session
+    chown nginx:nginx /var/lib/php/session
     chkconfig nginx on
     /etc/init.d/nginx start
     chkconfig php-fpm on
@@ -106,25 +118,33 @@ Instalacion
 Mantenimiento
 -------------
 
-**Agregar usuario**
+**Crear usuario de shell**
 
     useradd -u 100 -g 100 -G wheel -s /bin/bash -m manuel
     passwd manuel
 
-**Crear rol de usuario en PostgreSQL**
-
-    su - postgres -c 'createuser -d manuel'
-
-**Crear carpeta publica de usuario**
+**Crear carpeta publica en usuario de shell**
 
     chmod 711 /home/manuel
     mkdir /home/manuel/public_html
 
-**Agregar host virtual**
+**Crear rol en PostgreSQL para usuario**
 
-    mkdir /srv/sites/api.codigo.labplc.mx
-    mkdir /srv/sites/api.codigo.labplc.mx/web
-    mkdir /srv/sites/api.codigo.labplc.mx/web/htdocs
-    mkdir /srv/sites/api.codigo.labplc.mx/log
-    chown nginx:nginx /srv/sites/api.codigo.labplc.mx/log
-    emacs /etc/nginx/conf.d/api.conf
+    createuser -U postgres -s -P manuel
+
+**Nuevo host virtual**
+
+    mkdir /srv/sites/acopia.me
+    mkdir /srv/sites/acopia.me/web
+    mkdir /srv/sites/acopia.me/web/htdocs
+    mkdir /srv/sites/acopia.me/log
+    chown nginx:nginx /srv/sites/acopia.me/log
+    emacs /etc/nginx/conf.d/acopiame.conf
+
+**Crear rol en PostgreSQL para aplicación web**
+
+    createuser -U postgres -I -P acopiame
+
+**Crear base de datos para aplicación web**
+
+    createdb -U postgres acopiame -O acopiame
