@@ -114,6 +114,14 @@ Instalacion
     echo 'codigo.labplc.mx' > /srv/sites/codigo.labplc.mx/web/htdocs/index.html
     echo '<?php phpinfo(); ?>' > /srv/sites/codigo.labplc.mx/web/htdocs/phpinfo.php
     /etc/init.d/nginx restart
+    
+**Instalar soporte para UUID postgresql**
+
+    sudo yum install postgresql93-contrib
+    
+ En sql editor
+
+    CREATE EXTENSION "uuid-ossp";
 
 Mantenimiento
 -------------
