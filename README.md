@@ -96,6 +96,26 @@ Instalacion
 **Git**
 
     yum install git.x86_64
+    
+**Ruby con rvm**
+
+    groupadd rvm
+    \curl -L https://get.rvm.io | sudo bash -s stable
+    source /etc/profile.d/rvm.sh
+    source ~/.bashrc
+    usermod -a -G rvm usuario
+    rvm install 2.0.0
+    
+**Rails con rvm**
+
+    gem install rails bundler
+    
+    
+**nginx con passenger**
+
+    gem install passenger
+    rvmsudo passenger-install-nginx-module
+    
 
 **Sudo**
 
