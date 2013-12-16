@@ -74,7 +74,7 @@ Instalacion
 **Nginx y PHP-FPM**
 
     emacs /etc/yum.repos.d/nginx.repo
-    yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64
+    yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64 php-gd.x86_64
     cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.orig
     emacs /etc/php-fpm.d/www.conf
     mkdir /var/lib/php/session
@@ -96,7 +96,8 @@ Instalacion
 **Git**
 
     yum install git.x86_64
-    
+    mkdir /srv/repos
+
 **Ruby con rvm**
 
     groupadd rvm
@@ -176,3 +177,10 @@ Mantenimiento
 **Crear base de datos para aplicación web**
 
     createdb -U postgres acopiame -O acopiame
+
+**Crear deposito de git local***
+
+    groupadd -g 502 datos
+    usermod -a -G 502 manuel
+    git init --bare datos.git --shared=group
+    chgrp -R datos /srv/repos/datos.git
