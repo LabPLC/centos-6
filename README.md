@@ -1,10 +1,7 @@
-CentOS 6.4
-==========
+CentOS 6
+========
 
-Manual y ejemplo de configuración para un servidor CentOS 6.4
-
-Instalacion
------------
+Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.4
 
 **Configuracion basica**
 
@@ -74,11 +71,13 @@ Instalacion
 **Nginx y PHP-FPM**
 
     emacs /etc/yum.repos.d/nginx.repo
-    yum install nginx.x86_64 php-fpm.x86_64 php-pgsql.x86_64
+    yum install nginx.x86_64 php-fpm.x86_64
     cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.orig
     emacs /etc/php-fpm.d/www.conf
+    cp /etc/php.ini /etc/php.ini.orig
+    emacs /etc/php.ini
     mkdir /var/lib/php/session
-    chown nginx:nginx /var/lib/php/session
+    chown nginx:nginx /var/lib/php/session /var/log/nginx
     chkconfig nginx on
     /etc/init.d/nginx start
     chkconfig php-fpm on
@@ -86,7 +85,7 @@ Instalacion
 
 **Extensiones PHP**
 
-    yum install php-pear.noarch php-devel.x86_64 make.x86_64
+    yum install php-pear.noarch php-devel.x86_64 make.x86_64  php-pgsql.x86_64
     pecl install oauth
 
 **NodeJS y NPM**
@@ -97,25 +96,23 @@ Instalacion
 
     yum install git.x86_64
     
-**Ruby con rvm**
+**Ruby con RVM**
 
     groupadd rvm
-    \curl -L https://get.rvm.io | sudo bash -s stable
+    curl -L https://get.rvm.io | sudo bash -s stable
     source /etc/profile.d/rvm.sh
     source ~/.bashrc
     usermod -a -G rvm usuario
     rvm install 2.0.0
     
-**Rails con rvm**
+**Rails con RVM**
 
     gem install rails bundler
     
-    
-**nginx con passenger**
+**Nginx y Passenger**
 
     gem install passenger
     rvmsudo passenger-install-nginx-module
-    
 
 **Sudo**
 
@@ -127,8 +124,6 @@ Instalacion
     mkdir /srv/sites/codigo.labplc.mx
     mkdir /srv/sites/codigo.labplc.mx/web
     mkdir /srv/sites/codigo.labplc.mx/web/htdocs
-    mkdir /srv/sites/codigo.labplc.mx/log
-    chown nginx:nginx /srv/sites/codigo.labplc.mx/log
     mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.orig
     emacs /etc/nginx/conf.d/default.conf
     echo 'codigo.labplc.mx' > /srv/sites/codigo.labplc.mx/web/htdocs/index.html
@@ -139,12 +134,9 @@ Instalacion
 
     sudo yum install postgresql93-contrib
     
- En sql editor
+ En sql editor:
 
     CREATE EXTENSION "uuid-ossp";
-
-Mantenimiento
--------------
 
 **Crear usuario de shell**
 
@@ -165,9 +157,6 @@ Mantenimiento
     mkdir /srv/sites/acopia.me
     mkdir /srv/sites/acopia.me/web
     mkdir /srv/sites/acopia.me/web/htdocs
-    mkdir /srv/sites/acopia.me/log
-    chown nginx:nginx /srv/sites/acopia.me/log
-    emacs /etc/nginx/conf.d/acopiame.conf
 
 **Crear rol en PostgreSQL para aplicación web**
 
@@ -176,3 +165,10 @@ Mantenimiento
 **Crear base de datos para aplicación web**
 
     createdb -U postgres acopiame -O acopiame
+
+**Aplicaciones Rails***
+
+    mkdir /srv/sites/dev.codigo.labplc.mx
+    mkdir /srv/sites/dev.codigo.labplc.mx/web
+    mkdir /srv/sites/dev.codigo.labplc.mx/web/htdocs    
+    emacs /etc/nginx/conf.d/rails.conf
