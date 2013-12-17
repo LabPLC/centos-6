@@ -1,7 +1,7 @@
 CentOS 6
 ========
 
-Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.4
+Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
 
 **Configuracion basica**
 
@@ -179,14 +179,14 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.4
 
     createdb -U postgres acopiame -O acopiame
 
-**Aplicaciones Rails***
+**Aplicaciones Rails**
 
     mkdir /srv/sites/dev.codigo.labplc.mx
     mkdir /srv/sites/dev.codigo.labplc.mx/web
     mkdir /srv/sites/dev.codigo.labplc.mx/web/htdocs    
     emacs /etc/nginx/conf.d/rails.conf
 
-**Crear deposito de Git local***
+**Crear deposito de Git local**
 
     groupadd -g 502 datos
     usermod -a -G 502 manuel
