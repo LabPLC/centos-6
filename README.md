@@ -38,6 +38,7 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
     iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 25 -j ACCEPT
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
     iptables -A INPUT -p tcp --dport 8000:8999 -j ACCEPT
 
@@ -52,6 +53,16 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orig
     emacs /etc/ssh/sshd_config
     /etc/init.d/sshd restart
+
+**Postfix**
+
+    cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
+    emacs /etc/postfix/main.cf
+    mv /etc/postfix/virtual /etc/postfix/virtual.orig
+    emacs /etc/postfix/virtual
+
+    chkconfig postfix on
+    /etc/init.d/postfix start
 
 **PostgreSQL y PostGIS**
 
