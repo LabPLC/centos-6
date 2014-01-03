@@ -61,6 +61,7 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     mv /etc/postfix/virtual /etc/postfix/virtual.orig
     emacs /etc/postfix/virtual
 
+    postmap /etc/postfix/virtual
     chkconfig postfix on
     /etc/init.d/postfix start
 
