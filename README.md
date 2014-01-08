@@ -141,6 +141,25 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     cp /etc/sudoers /etc/sudoers.orig
     visudo
 
+**SFTP con chroot**
+
+Agregar grupo `sftp` y carpeta para usuarios:
+
+    groupadd sftp
+    mkdir /srv/sftp
+
+Tocar en `/etc/ssh/sshd_config`:
+
+    Subsystem       sftp    internal-sftp
+    Match Group sftp
+        ChrootDirectory /srv/sftp
+        ForceCommand internal-sftp
+        AllowTcpForwarding no
+
+Reiniciar `sshd`:
+
+    /etc/init.d/sshd restart
+
 **Sitio codigo.labplc.mx**
 
     mkdir /srv/sites/codigo.labplc.mx
@@ -206,11 +225,16 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     git init --bare /srv/repos/datos.git --shared=group
     chgrp -R datos /srv/repos/datos.git
 
-Clonar repositorio de datos a Usuario.dev
+**Clonar deposito de datos en usuario de shell**
 
     git config --global user.name 'suNombre'
     git config --global user.email 'suCorreo'
     git clone /srv/repos/datos.git/
     chmod 777 datos/web/views/_compile/
     
-En la carpeta datos se encuentra el clone
+En la carpeta datos se encuentra el deposito de usuario.dev
+
+**Usuario de SFTP**
+
+    useradd -g sftp -d /srv/sftp/sivev -s /sbin/nologin sivev
+    passwd usuario
