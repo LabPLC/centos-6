@@ -238,7 +238,7 @@ Reiniciar `sshd`:
     git config --global user.name 'suNombre'
     git config --global user.email 'suCorreo'
     git clone /srv/repos/datos.git/
-    chmod 777 datos/web/views/_compile/ datos/web/cache/* datos/config/rate_limit/
+    chmod 777 -R datos/web/views/_compile/ datos/web/cache/* datos/web/config/rate_limit/
     
 En la carpeta datos se encuentra el deposito de usuario.dev
 
