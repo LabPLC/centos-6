@@ -106,7 +106,7 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
 
 **Extensiones PHP**
 
-    yum install php-pear.noarch php-devel.x86_64 make.x86_64  php-pgsql.x86_64  php-gd.x86_64 php-mysql.x86_64
+    yum install php-pear.noarch php-devel.x86_64 make.x86_64  php-pgsql.x86_64  php-gd.x86_64 php-mysql.x86_64 php-mcrypt.x86_64
     pecl install oauth
 
 **NodeJS y NPM**
