@@ -219,12 +219,12 @@ Reiniciar `sshd`:
 
     createdb -U postgres acopiame -O acopiame
 
-**Aplicaciones Rails**
+**Aplicaciones Rails/Laravel**
 
     mkdir /srv/sites/dev.codigo.labplc.mx
     mkdir /srv/sites/dev.codigo.labplc.mx/web
     mkdir /srv/sites/dev.codigo.labplc.mx/web/htdocs    
-    emacs /etc/nginx/conf.d/rails.conf
+    emacs /etc/nginx/conf.d/dev.conf
 
 **Crear deposito de Git local**
 
