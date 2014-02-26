@@ -84,6 +84,14 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     cp /var/lib/pgsql/9.3/data/pg_hba.conf /var/lib/pgsql/9.3/data/pg_hba.conf.orig
     emacs /var/lib/pgsql/9.3/data/pg_hba.conf
     /etc/init.d/postgresql-9.3 restart
+    
+**Agregar GIS a una base de datos**
+
+    CREATE EXTENSION postgis;
+    
+**Parametros de configuración de Nginx (./configure)**
+    
+     --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-mail --with-mail_ssl_module --with-file-aio --with-ipv6 --with-cc-opt='-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic'
 
 **Nginx y PHP-FPM**
 
@@ -106,7 +114,7 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
 
 **Extensiones PHP**
 
-    yum install php-pear.noarch php-devel.x86_64 make.x86_64  php-pgsql.x86_64  php-gd.x86_64 php-mysql.x86_64 php-mcrypt.x86_64
+    yum install php-pear.noarch php-devel.x86_64 make.x86_64  php-pgsql.x86_64  php-gd.x86_64 php-mysql.x86_64 php-dba.x64_64 php-mcrypt.x86_64
     pecl install oauth
 
 **NodeJS y NPM**
@@ -230,7 +238,7 @@ Reiniciar `sshd`:
     git config --global user.name 'suNombre'
     git config --global user.email 'suCorreo'
     git clone /srv/repos/datos.git/
-    chmod 777 datos/web/views/_compile/
+    chmod 777 -R datos/web/views/_compile/ datos/web/cache/* datos/web/config/rate_limit/
     
 En la carpeta datos se encuentra el deposito de usuario.dev
 
