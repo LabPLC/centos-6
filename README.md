@@ -98,6 +98,9 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     emacs /etc/yum.repos.d/nginx.repo
     yum install nginx.x86_64 php-fpm.x86_64
 
+    cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+    emacs /etc/nginx/nginx.conf
+    
     cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.orig
     emacs /etc/php-fpm.d/www.conf
 
