@@ -137,8 +137,8 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     wget https://raw.githubusercontent.com/grossws/tesseract-ocr-specs/master/specs/tesseract-langpack.spec
     yum-builddep tesseract.spec
     rpmbuild -ba tesseract.spec
-    rpmbuild -ba tesseract-langpack.spec
     yum install ~/rpmbuild/RPMS/$(uname -m)/tesseract{,-devel}-3.02-*.rpm
+    rpmbuild -ba tesseract-langpack.spec
 
 Pendiente langpack
 
