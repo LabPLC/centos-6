@@ -362,7 +362,7 @@ relay_domains =
 #
 # The VIRTUAL_README document gives information about the many forms
 # of domain hosting that Postfix supports.
-virtual_alias_domains = codigo.labplc.mx
+virtual_alias_domains = codigo.labplc.mx miecobici.mx
 virtual_alias_maps = hash:/etc/postfix/virtual
 
 # "USER HAS MOVED" BOUNCE MESSAGES
