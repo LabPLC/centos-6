@@ -271,3 +271,15 @@ En la carpeta datos se encuentra el deposito de usuario.dev
 
     useradd -g sftp -d /srv/sftp/sivev -s /sbin/nologin sivev
     passwd usuario
+
+Instalación de MYSQL
+
+**Descargar y correr MYSQL desde SSH**
+
+    sudo yum install mysql-server
+    sudo /etc/init.d/mysqld start
+    
+**Establecer password de ROOT**
+
+    /usr/bin/mysqladmin -u root password 'new-password'
+    /usr/bin/mysqladmin -u root -h codigo.labplc.mx password 'new-password'
