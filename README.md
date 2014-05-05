@@ -37,10 +37,12 @@ Acordeon para instalar, configurar y operar nuestro servidor CentOS 6.x
     iptables -A INPUT -i lo -j ACCEPT
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -p tcp --dport 21 -j ACCEPT
     iptables -A INPUT -p tcp --dport 22 -j ACCEPT
     iptables -A INPUT -p tcp --dport 25 -j ACCEPT
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
     iptables -A INPUT -p tcp --dport 8000:8999 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 30000:50000 -j ACCEPT
 
     iptables -P INPUT DROP
     iptables -P FORWARD DROP
@@ -272,14 +274,26 @@ En la carpeta datos se encuentra el deposito de usuario.dev
     useradd -g sftp -d /srv/sftp/sivev -s /sbin/nologin sivev
     passwd usuario
 
-Instalación de MYSQL
+**Instalación de MYSQL**
 
-**Descargar y correr MYSQL desde SSH**
-
-    sudo yum install mysql-server
-    sudo /etc/init.d/mysqld start
+    yum install mysql-server
+    chkconfig mysqld on
+    /etc/init.d/mysqld start
     
-**Establecer password de ROOT**
+Establecer password de ROOT:
 
-    /usr/bin/mysqladmin -u root password 'new-password'
-    /usr/bin/mysqladmin -u root -h codigo.labplc.mx password 'new-password'
+    mysqladmin -u root password 'new-password'
+    mysqladmin -u root -h codigo.labplc.mx password 'new-password'
+
+**Instalacion Pure-FTPd**
+
+    yum install pure-ftpd
+    cp /etc/pure-ftpd/pure-ftpd.conf /etc/pure-ftpd/pure-ftpd.conf.orig
+    emacs /etc/pure-ftpd/pure-ftpd.conf
+    chkconfig pure-ftpd on
+    /etc/init.d/pure-ftpd start
+
+Crear usuario:
+
+    pure-pw useradd usuario -u ftp -d ruta -m
+    chown ftp:ftp ruta
