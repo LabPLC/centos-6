@@ -298,13 +298,13 @@ Crear usuario:
     pure-pw useradd usuario -u ftp -d ruta -m
     chown ftp:ftp ruta
 
-**Elasticsearch
+**Elasticsearch**
 
-Agregar repo a yum
+Agregar repo a yum:
 
     rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
-Agregar en **/etc/yum.repos.d/elasticsearch.repo
+Agregar en `/etc/yum.repos.d/elasticsearch.repo`:
 
     [elasticsearch-1.2]
     name=Elasticsearch repository for 1.2.x packages
@@ -313,19 +313,15 @@ Agregar en **/etc/yum.repos.d/elasticsearch.repo
     gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
     enabled=1
 
-Instalar Elasticsearch
+Instalar Elasticsearch:
 
-    sudo yum install elasticsearch           
+    yum install java-1.7.0-openjdk elasticsearch           
 
-Agregar a inicio
+Agregar al inicio:
 
-    sudo /sbin/chkconfig  --add elasticsearch
+    chkconfig elasticsearch on
 
-Instalar OpenJDK
-
-    yum install java-1.7.0-openjdk
-
-Iniciar 
+Iniciar:
     
     /etc/init.d/elasticsearch start
     
